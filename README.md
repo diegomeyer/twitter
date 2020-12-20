@@ -78,7 +78,7 @@ Flume:
 
 - 
 
-Foi encontrado um problema de desserialização dos arquivos gerados,  para contornar o problema foi usado:
+Foi encontrado um problema de desserialização dos arquivos gerados, para contornar o problema foi usado:
 
  - TwitterAgent.sources.Twitter.type = com.cloudera.flume.source.TwitterSource
 
@@ -86,10 +86,10 @@ ao invés de:
 
  - TwitterAgent.sources.Twitter.type = org.apache.flume.source.twitter.TwitterSource
 
-Foi feito o build seguindo:
+para isso é necessario 2 arquivos e para gerar foi feito o build seguindo:
  - https://github.com/cloudera/cdh-twitter-example
 
-Os dois arquivo ja estão no na pasta "extras".
+Os dois arquivo já estão no na pasta "extras".
 
 Crie as seguintes pastas:
 ```
@@ -107,11 +107,44 @@ cp flume-sources-1.0-SNAPSHOT.jar /var/lib/flume-ng/plugins.d/twitter-streaming/
 cp hive-serdes-1.0-SNAPSHOT.jar $HIVE_HOME/lib
 ```
 
-<!-- ## 🎈 Usage <a name="usage"></a>
+Crie o aquivo flume-env.sh:
 
-Add notes about how to use the system.
+```
+cp $FLUME_HOME/conf/flume-env.sh.template $FLUME_HOME/conf/flume-env.sh
+```
 
-## 🚀 Deployment <a name = "deployment"></a>
+Edite o arquivo e adicione:
+
+```
+export CLASSPATH=$CLASSPATH:/FLUME_HOME/lib/*
+export FLUME_CLASSPATH="/usr/lib/flume-ng/plugins.d/twitter-streaming/lib/flume-sources-1.0-SNAPSHOT.jar"
+```
+
+Copie o jar guava-27.0-jre.jar da pasta $HADOOP_HOME/share/hadoop/common/lib/ para a pasta $FLUME_HOME/lib e apague a versão antiga (guava-11.0.2.jar).
+
+Crie a pasta /tweets/ no hdfs:
+
+```
+hadoop fs -mkdir -p /tweets/
+```
+
+Vamos criar a tabela no hive
+
+```
+hive -f create_table_hive.hql
+```
+
+
+## 🎈 Usage <a name="usage"></a>
+
+Para iniciar a captura dos tweets utilize o comando:
+
+```
+flume-ng agent -f $FLUME_HOME/conf/flume_twitter.conf Dflume.root.logger=DEBUG,console -n TwitterAgent
+```
+
+
+<!-- ## 🚀 Deployment <a name = "deployment"></a>
 
 Add additional notes about how to deploy this on a live system.
 
