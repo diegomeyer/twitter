@@ -1,0 +1,6 @@
+cassandra-driver==3.24.0
+kafka-python==2.0.2
+tweepy==3.9.0
+fastapi==0.63.0
+cqlsh==5.0.4
+uvicorn==0.13.2

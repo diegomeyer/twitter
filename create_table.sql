@@ -1,0 +1,1 @@
+CREATE TABLE IF NOT EXISTS tweets (id UUID PRIMARY KEY, created_at text, tweet text, user_id text,retweetcount int, location text, place text, fullmessage text);

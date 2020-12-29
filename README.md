@@ -10,7 +10,7 @@
 - [Deployment](#deployment)
 <!-- - [Usage](#usage) -->
 <!-- - [Built Using](#built_using) -->
-<!-- - [Contributing](../CONTRIBUTING.md) -->
+
 - [Authors](#authors)
 - [Acknowledgments](#acknowledgement)
 
@@ -32,7 +32,7 @@ Regras:
 
 - Relatório funcional com a solução,definições dos conceitos, tecnologias utilizadas e referência com os scripts desenvolvidos. (pdf, ppt,txt).
 
- 
+
 
 Cenários de implementação:
 
@@ -52,115 +52,52 @@ Cenários de implementação:
 Softwares necessarios para a execução
 
 ```
-Hadoop
-Hive
-Flume
-xxx
-xxx
+Python
+Kafka
+Cassandra DB
+FastAPI
 ```
 
 ### Instalação
 
 Passo a passo para a instalação de todos os softwares necessarios.
 
-Hadoop:
+Kafka:
 
-- http://www.ehadoopinfo.com/2017/07/installing-apache-hadoop-in-ubuntu.html
-
-
-Hive:
+- https://www.digitalocean.com/community/tutorials/how-to-install-apache-kafka-on-ubuntu-18-04-pt
 
 
-- https://www.dezyre.com/hadoop-tutorial/install-hive
+Cassandra:
 
 
-Flume:
+- https://phoenixnap.com/kb/install-cassandra-on-ubuntu
 
-- 
 
-Foi encontrado um problema de desserialização dos arquivos gerados, para contornar o problema foi usado:
+FastAPI:
 
- - TwitterAgent.sources.Twitter.type = com.cloudera.flume.source.TwitterSource
-
-ao invés de:
-
- - TwitterAgent.sources.Twitter.type = org.apache.flume.source.twitter.TwitterSource
-
-para isso é necessario 2 arquivos e para gerar foi feito o build seguindo:
- - https://github.com/cloudera/cdh-twitter-example
-
-Os dois arquivo já estão no na pasta "extras".
-
-Crie as seguintes pastas:
-```
-mkdir -p /usr/lib/flume-ng/plugins.d/twitter-streaming/lib/
-
-mkdir -p /var/lib/flume-ng/plugins.d/twitter-streaming/lib/
-```
-Copie os arquivos:
-
-```
-cp flume-sources-1.0-SNAPSHOT.jar /usr/lib/flume-ng/plugins.d/twitter-streaming/lib/
-
-cp flume-sources-1.0-SNAPSHOT.jar /var/lib/flume-ng/plugins.d/twitter-streaming/lib/
-
-cp hive-serdes-1.0-SNAPSHOT.jar $HIVE_HOME/lib
-```
-
-Crie o aquivo flume-env.sh:
-
-```
-cp $FLUME_HOME/conf/flume-env.sh.template $FLUME_HOME/conf/flume-env.sh
-```
-
-Edite o arquivo e adicione:
-
-```
-export CLASSPATH=$CLASSPATH:/FLUME_HOME/lib/*
-export FLUME_CLASSPATH="/usr/lib/flume-ng/plugins.d/twitter-streaming/lib/flume-sources-1.0-SNAPSHOT.jar"
-```
-
-Copie o jar guava-27.0-jre.jar da pasta $HADOOP_HOME/share/hadoop/common/lib/ para a pasta $FLUME_HOME/lib e apague a versão antiga (guava-11.0.2.jar).
-
-Crie a pasta /tweets/ no hdfs:
-
-```
-hadoop fs -mkdir -p /tweets/
-```
-
-Vamos criar a tabela no hive
-
-```
-hive -f create_table_hive.hql
-```
-
+- https://fastapi.tiangolo.com/#installation
 
 ## 🎈 Usage <a name="usage"></a>
-
+Criar a tabela tweet no Cassandra utilizando o script "table.
 Para iniciar a captura dos tweets utilize o comando:
 
 ```
-flume-ng agent -f $FLUME_HOME/conf/flume_twitter.conf Dflume.root.logger=DEBUG,console -n TwitterAgent
+./start.sh
 ```
+
+Com isso criamos a tabela tweets no Cassandra e inicializamos producer, consumer e fastAPI.
 
 
 <!-- ## 🚀 Deployment <a name = "deployment"></a>
 
-Add additional notes about how to deploy this on a live system.
+
 
 ## ⛏️ Built Using <a name = "built_using"></a>
 
-- [MongoDB](https://www.mongodb.com/) - Database
-- [Express](https://expressjs.com/) - Server Framework
-- [VueJs](https://vuejs.org/) - Web Framework
-- [NodeJs](https://nodejs.org/en/) - Server Environment -->
+
 
 ## ✍️ Authors <a name = "authors"></a>
 
 - [@diegomeyer](https://github.com/diegomeyer)
 
 ## 🎉 Acknowledgements <a name = "acknowledgement"></a>
-
-- Hat tip to anyone whose code was used
-- Inspiration
-- References
