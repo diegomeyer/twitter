@@ -7,12 +7,8 @@
 
 - [Sobre - Desafio](#about)
 - [Getting Started](#getting_started)
-- [Deployment](#deployment)
-<!-- - [Usage](#usage) -->
-<!-- - [Built Using](#built_using) -->
-
 - [Authors](#authors)
-- [Acknowledgments](#acknowledgement)
+
 
 ## 🧐 Desafio <a name = "about"></a>
 
@@ -92,12 +88,7 @@ Com isso criamos a tabela tweets no Cassandra e inicializamos producer, consumer
 
 
 
-## ⛏️ Built Using <a name = "built_using"></a>
-
-
-
 ## ✍️ Authors <a name = "authors"></a>
 
 - [@diegomeyer](https://github.com/diegomeyer)
 
-## 🎉 Acknowledgements <a name = "acknowledgement"></a>
